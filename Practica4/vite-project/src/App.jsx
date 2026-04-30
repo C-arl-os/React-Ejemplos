@@ -8,6 +8,12 @@ function App() {
     { id: 3, name: "Luis", role: "UI Designer" },
   ]);
   const [newUserName, setNewUserName] = useState("");
+  const [editingUserId, setEditingUserId] = useState(null);
+
+  const handleEditUser = (user) => {
+    setEditingUserId(user.id);
+    setNewUserName(user.name);
+  };  
 
   const handleDeleteUser = (id) => {
     const updatedUsers = users.filter((user) => user.id !== id);
@@ -16,7 +22,10 @@ function App() {
   return (
     <div>
       <h1>User Manager</h1>
-      <UserList users={users} onDeleteUser={handleDeleteUser} />
+      <UserList
+        users={users} 
+        onDeleteUser={handleDeleteUser}
+        onEditUser={handleEditUser} />
       <label>
         Add User:
         <input
@@ -26,14 +35,25 @@ function App() {
         />
         <button
           onClick={() => {
-            setUsers([
-              ...users,
-              { id: users.length + 1, name: newUserName, role: "New User" },
-            ]);
-            setNewUserName(""); // ← aquí sí correcto
+            if (editingUserId) {
+              // Update existing user
+              setUsers(
+                users.map((user) =>
+                  user.id === editingUserId ? { ...user, name: newUserName } : user
+                )
+              );
+              setEditingUserId(null);
+            } else {
+              // Add new user
+              setUsers([
+                ...users,
+                { id: users.length + 1, name: newUserName, role: "New User" },
+              ]);
+            }
+            setNewUserName(""); 
           }}
         >
-          Add
+          {editingUserId ? "Update" : "Add"}
         </button>
       </label>
     </div>

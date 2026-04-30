@@ -1,4 +1,4 @@
-function UserList({ users, onDeleteUser }) {
+function UserList({ users, onDeleteUser, onEditUser }) {
   return (
     <div>
       <h2>User List</h2>
@@ -9,6 +9,7 @@ function UserList({ users, onDeleteUser }) {
           <p>ID: {user.id}</p>
           <p>{user.role}</p>
           <button onClick={() => onDeleteUser(user.id)}>Delete</button>
+          <button onClick={() => onEditUser(user)}>Edit</button>
         </div>
       ))}
     </div>
