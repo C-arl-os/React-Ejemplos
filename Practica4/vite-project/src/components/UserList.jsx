@@ -24,13 +24,15 @@ function UserList({ users, onDeleteUser, onEditUser }) {
           {/* BOTÓN DELETE:
               Al hacer click, ejecuta la función enviada desde App
               y le pasa el id del usuario */}
-          <button onClick={() => onDeleteUser(user.id)}>
+          <button  className="delete-btn" onClick={() => { 
+            if (confirm(`Are you sure you want to delete ${user.name}?`)) {
+            onDeleteUser(user.id) }}}>
             Delete
           </button>
 
           {/* BOTÓN EDIT:
               Envía todo el objeto user porque necesitamos más datos */}
-          <button onClick={() => onEditUser(user)}>
+          <button className="edit-btn" onClick={() => onEditUser(user)}>
             Edit
           </button>
 

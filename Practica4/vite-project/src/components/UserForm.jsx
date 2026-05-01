@@ -5,15 +5,18 @@ function UserForm({
   editingUserId,      // Indica si estamos editando (si tiene valor) o agregando (null)
   onSubmit,           // Función que se ejecuta al hacer click (agregar o actualizar)
   setError,           // Función para limpiar o asignar errores
-  error               // Mensaje de error
+  error,
+  newRole,            // Estado: valor actual del input de rol
+  setNewRole,         // Función para actualizar el input de rol
 }) {
   return (
     <div>
       <label>
-        Add User:
-
+       
+        <h2>{editingUserId ? "Edit User" : "Add User"}</h2>
         {/* INPUT CONTROLADO:
             El valor del input depende del estado newUserName */}
+        <div className="form-group">
         <input
           type="text"
           value={newUserName}
@@ -27,7 +30,7 @@ function UserForm({
             setError("");
           }}
         />
-
+        </div>
         {/* RENDER CONDICIONAL:
             Si existe error (tiene texto), se muestra el mensaje */}
         {error && <p style={{ color: "red" }}>{error}</p>}
@@ -42,6 +45,14 @@ function UserForm({
           {editingUserId ? "Update" : "Add"}
 
         </button>
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="Role"
+            value={newRole}
+            onChange={(e) => setNewRole(e.target.value)}
+          />
+        </div>
       </label>
     </div>
   );

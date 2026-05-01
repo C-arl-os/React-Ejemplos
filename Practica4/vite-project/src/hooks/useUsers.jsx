@@ -33,6 +33,11 @@ function useUsers() {
   // 🧠 ESTADO DE ERROR (mensaje para el usuario)
   const [error, setError] = useState("");
 
+  // Busqueda de usuarios en localStorage al cargar el componente
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const [newRole, setNewRole] = useState("");
+
   // 🔁 EFECTO: guarda los usuarios en localStorage cuando cambian
   useEffect(() => {
     localStorage.setItem("users", JSON.stringify(users));
@@ -45,6 +50,7 @@ function useUsers() {
 
     // Carga el nombre en el input
     setNewUserName(user.name);
+    setNewRole(user.role);
   };
 
   // ❌ ELIMINAR USUARIO
@@ -71,7 +77,7 @@ function useUsers() {
       setUsers(
         users.map((user) =>
           user.id === editingUserId
-            ? { ...user, name: newUserName } // actualiza nombre
+            ? { ...user, name: newUserName, role: newRole } // actualiza nombre y rol
             : user
         )
       );
@@ -94,6 +100,8 @@ function useUsers() {
 
     // Limpiar input
     setNewUserName("");
+    setNewUserRole("");
+    setError("");
   };
 
   // 📦 Retorna todo lo necesario para usar en App
@@ -107,6 +115,10 @@ function useUsers() {
     handleAddOrUpdateUser,
     error,
     setError,
+    searchTerm,
+    setSearchTerm,
+    newRole,
+    setNewRole,
   };
 }
 
