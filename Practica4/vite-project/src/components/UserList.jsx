@@ -4,7 +4,7 @@ function UserList({ users, onDeleteUser, onEditUser }) {
       <h2>User List</h2>
 
       {users.map((user) => (
-        <div key={user.id}>
+        <div key={user.id} className="user-card">
           <h3>{user.name}</h3>
           <p>ID: {user.id}</p>
           <p>{user.role}</p>
