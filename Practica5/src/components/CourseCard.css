@@ -1,0 +1,126 @@
+/* ─── Course Card ───────────────────────────────────────────────
+   Pensado para vivir dentro de .courses-container (grid).
+   Hereda tokens de courses.css (--surface, --border, --radius-lg, etc.)
+   ──────────────────────────────────────────────────────────────── */
+
+.course-card {
+  /* Layout interno: contenido respira y los CTAs se anclan abajo */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  /* Superficie limpia. El grid ya gestiona el spacing externo con `gap`,
+     así que evitamos `margin` (rompía el alineado del grid). */
+  background: #ffffff;
+  border: 1px solid var(--border, #dce3f0);
+  border-radius: 16px;
+  padding: 24px;
+
+  /* Sombra en dos capas: una corta y nítida + otra ancha y difusa.
+     Da una elevación más realista que una sola sombra. */
+  box-shadow:
+    0 1px 2px oklch(0% 0 0 / 0.04),
+    0 8px 24px oklch(0% 0 0 / 0.08);
+
+  /* Acento lateral sutil que aparece en hover */
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  transition:
+    transform 250ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 250ms ease,
+    border-color 250ms ease;
+}
+
+/* Barra de acento decorativa (queda oculta hasta el hover) */
+.course-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(180deg, #3b7ae8, #2563eb);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 1;
+}
+
+.course-card:hover {
+  transform: translateY(-6px);
+  border-color: transparent;
+  box-shadow:
+    0 2px 4px oklch(0% 0 0 / 0.06),
+    0 16px 40px oklch(0% 0 0 / 0.14);
+}
+
+.course-card:hover::before {
+  transform: scaleY(1);
+}
+
+/* Foco accesible (cuando la tarjeta sea un <a> o tenga tabindex) */
+.course-card:focus-within {
+  outline: none;
+  box-shadow:
+    0 0 0 3px oklch(60% 0.18 258 / 0.35),
+    0 8px 24px oklch(0% 0 0 / 0.08);
+}
+
+/* ─── Tipografía interna ───────────────────────────────────────── */
+.course-card h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #1d4ed8;
+  text-wrap: balance;
+}
+
+.course-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #4b5563;
+  text-wrap: pretty;
+}
+
+/* Si hay imagen dentro de la card, que se integre limpia */
+.course-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Reduce motion: respeta preferencias del usuario */
+@media (prefers-reduced-motion: reduce) {
+  .course-card,
+  .course-card::before {
+    transition: none;
+  }
+  .course-card:hover {
+    transform: none;
+  }
+}
+
+
+.progress-container {
+  width: 100%;
+  height: 20px;
+
+  background-color: #d1d5db;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  margin-top: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+
+  background-color: #22c55e;
+
+  transition: width 0.3s ease;
+}
