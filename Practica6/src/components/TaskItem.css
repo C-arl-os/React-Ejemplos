@@ -1,61 +1,90 @@
 article {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 12px;
-  padding: 16px;
+  gap: 10px;
+  margin-bottom: 8px;
+  padding: 14px 16px;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  border-left: 4px solid #205acd;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
+  border: 1px solid #f0f0f0;
+  border-left: 4px solid #4f46e5;
 }
 
 article:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
   transform: translateX(4px);
+  border-left-color: #7c3aed;
 }
 
-span {
+article:has(.completed) {
+  border-left-color: #10b981;
+  background: #f0fdf4;
+}
+
+article span {
   flex: 1;
-  font-size: 16px;
-  color: #333;
+  font-size: 0.95rem;
+  color: #374151;
   word-break: break-word;
+  line-height: 1.5;
   transition: all 0.2s ease;
 }
 
 .completed {
   text-decoration: line-through;
   opacity: 0.5;
-  color: #999;
+  color: #9ca3af;
 }
 
-button {
+/* Toggle button — Completar / Pendiente */
+article button:first-of-type {
   cursor: pointer;
-  padding: 8px 14px;
-  border: none;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
+  padding: 7px 14px;
+  border: 1px solid #d1fae5;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
   white-space: nowrap;
+  background: #ecfdf5;
+  color: #059669;
   transition: all 0.2s ease;
-  background-color: #205acd;
+  letter-spacing: 0.01em;
+}
+
+article button:first-of-type:hover {
+  background: #059669;
   color: white;
+  border-color: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3);
 }
 
-button:hover {
-  background-color: #1a4599;
-  transform: scale(1.05);
+/* Edit button — Editar */
+article button:last-of-type {
+  cursor: pointer;
+  padding: 7px 14px;
+  border: 1px solid #dbeafe;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+  background: #eff6ff;
+  color: #2563eb;
+  transition: all 0.2s ease;
+  letter-spacing: 0.01em;
 }
 
-button:active {
-  transform: scale(0.95);
+article button:last-of-type:hover {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
 }
 
-button:last-child {
-  background-color: #ff9800;
-}
-
-button:last-child:hover {
-  background-color: #e68900;
+article button:active {
+  transform: scale(0.96) !important;
+  box-shadow: none !important;
 }
