@@ -1,0 +1,18 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Aprender fetch API",
+      "description": "Entender cómo consumir datos desde un backend fake",
+      "completed": false,
+      "priority": "high"
+    },
+    {
+      "id": "2",
+      "title": "Practicar async await",
+      "description": "Manejar operaciones asíncronas correctamente",
+      "completed": true,
+      "priority": "medium"
+    }
+  ]
+}
