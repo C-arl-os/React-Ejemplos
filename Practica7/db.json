@@ -13,6 +13,19 @@
       "description": "Manejar operaciones asíncronas correctamente",
       "completed": true,
       "priority": "medium"
+    },
+    {
+      "title": "aa",
+      "completed": false,
+      "priority": "medium",
+      "id": "TgWw2uxk6vA"
+    },
+    {
+      "title": "sss",
+      "completed": false,
+      "priority": "medium",
+      "id": "rx4dLqRRJ5A"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

@@ -1,9 +1,18 @@
 import './App.css'
 import { useTasks } from './hooks/useTasks'
 import TaskList from './components/TaskList'
+import TaskForm from './components/TaskForm'
 
 function App() {
-  const { tasks, isLoading, errorMessage } = useTasks()
+  const { tasks, isLoading, errorMessage, addTask } = useTasks()
+
+   if (isLoading) {
+  return <p>Cargando tareas...</p>
+}
+
+if (errorMessage) {
+  return <p>{errorMessage}</p>
+}
 
   return (
     <main className="app">
@@ -14,6 +23,7 @@ function App() {
 
       {errorMessage && <p>{errorMessage}</p>}
 
+      <TaskForm addTask={addTask} />
       <TaskList tasks={tasks} />
     </main>
   )
