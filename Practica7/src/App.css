@@ -1,10 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #0a0e27;
+  color: #e8eef7;
+  font-family: Arial, sans-serif;
+}
+
 .app {
   max-width: 900px;
   margin: 40px auto;
   padding: 24px;
-  font-family: Arial, sans-serif;
 }
 
 h1 {
   margin-bottom: 8px;
+  color: #a8c5dd;
 }
