@@ -6,6 +6,7 @@ export const useTasks = () => {
     const [tasks, setTasks] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [errorMessage, setErrorMessage] = useState(null)
+    const [isActionLoading, setIsActionLoading] = useState(false)
 
     useEffect(() => {
         fetchTasks()
@@ -35,12 +36,14 @@ export const useTasks = () => {
 
     const addTask = async (title) => {
         try {
+            setIsActionLoading(true)
             const newTask = {
                 title: title.trim(),
                 completed: false,
                 priority: 'medium',
             }
-
+            // Simulamos un retraso de 2 segundos para mostrar el estado de carga
+            await new Promise((resolve) => setTimeout(resolve, 2000))
             const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: {
@@ -58,6 +61,8 @@ export const useTasks = () => {
             setTasks((prevTasks) => [...prevTasks, createdTask])
         } catch (error) {
             setErrorMessage(error.message)
+        } finally {
+            setIsActionLoading(false)
         }
     }
 
@@ -114,7 +119,7 @@ export const useTasks = () => {
         }
     }
 
-}
+
 
 return {
     tasks,
@@ -123,5 +128,7 @@ return {
     addTask,
     deleteTask,
     toggleTaskCompletion,
+    isActionLoading,
 }
+
 }

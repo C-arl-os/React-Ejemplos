@@ -40,6 +40,30 @@
       "completed": false,
       "priority": "medium",
       "id": "ItLPYU0G3GQ"
+    },
+    {
+      "title": "ss",
+      "completed": false,
+      "priority": "medium",
+      "id": "VN0Lrc4nmDI"
+    },
+    {
+      "title": "tarea2",
+      "completed": false,
+      "priority": "medium",
+      "id": "LdVrernKg0A"
+    },
+    {
+      "title": "tareas",
+      "completed": false,
+      "priority": "medium",
+      "id": "Af-i37ZjvPA"
+    },
+    {
+      "title": "eee",
+      "completed": false,
+      "priority": "medium",
+      "id": "cIfNFscwxRU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
