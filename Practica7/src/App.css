@@ -386,3 +386,24 @@ button.secondary:hover {
     transition-duration: 0.01ms !important;
   }
 }
+
+.priority {
+  font-weight: bold;
+}
+
+.priority.high {
+  color: red;
+}
+
+.priority.medium {
+  color: orange;
+}
+
+.priority.low {
+  color: green;
+}
+
+.active-filter {
+  background-color: black;
+  color: white;
+}

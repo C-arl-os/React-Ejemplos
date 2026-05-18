@@ -12,7 +12,9 @@ const TaskItem = ({
             className={task.completed ? 'task-item completed' : 'task-item'}
         >
             {task.title}
-            <p>Prioridad: {task.priority}</p>
+            <p className={`priority ${task.priority}`}>
+                Prioridad: {task.priority}
+            </p>
 
             <button
                 type="button"

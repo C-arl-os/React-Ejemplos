@@ -35,7 +35,7 @@ export const useTasks = () => {
 
     // Función para agregar una nueva tarea
 
-    const addTask = async (title) => {
+    const addTask = async (title, priority) => {
         try {
             setErrorMessage(null)
             setLoadingTaskId('creating')
@@ -43,7 +43,7 @@ export const useTasks = () => {
             const newTask = {
                 title: title.trim(),
                 completed: false,
-                priority: 'medium',
+                priority: priority,
             }
 
             await new Promise((resolve) => setTimeout(resolve, 2000))

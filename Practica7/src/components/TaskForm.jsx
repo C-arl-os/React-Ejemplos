@@ -3,6 +3,7 @@ import { useState } from "react";
 const TaskForm = ({ addTask, loadingTaskId }) => {
     const [title, setTitle] = useState("");
     const isCreating = loadingTaskId === 'creating'
+    const [priority, setPriority] = useState("medium");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -11,7 +12,7 @@ const TaskForm = ({ addTask, loadingTaskId }) => {
             return;
         }
 
-        await addTask(title);
+        await addTask(title, priority);
 
         setTitle("");
     };
@@ -25,6 +26,16 @@ const TaskForm = ({ addTask, loadingTaskId }) => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
             />
+
+            <select
+                value={priority}
+                onChange={(e) => setPriority(e.target.value)}
+                disabled={isCreating}
+            >
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
 
             <button type="submit" disabled={isCreating || !title.trim()}>
                 {isCreating ? 'Agregando...' : 'Agregar Tarea'}
