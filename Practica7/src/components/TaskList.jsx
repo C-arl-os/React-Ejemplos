@@ -1,9 +1,11 @@
+import TaskItem from './TaskItem'
+
 const TaskList = ({
     tasks,
     deleteTask,
     toggleTaskCompletion,
     loadingTaskId,
-    loadingAction
+    loadingAction,
 }) => {
     if (tasks.length === 0) {
         return <p>No hay tareas disponibles.</p>
@@ -15,38 +17,14 @@ const TaskList = ({
                 const isThisTaskLoading = loadingTaskId === task.id
 
                 return (
-                    <li
+                    <TaskItem
                         key={task.id}
-                        className={
-                            task.completed
-                                ? 'task-item completed'
-                                : 'task-item'
-                        }
-                    >
-                        {task.title}
-
-                        <button
-                            type="button"
-                            disabled={isThisTaskLoading}
-                            onClick={() => deleteTask(task.id)}
-                        >
-                            {isThisTaskLoading && loadingAction === 'delete'
-                                ? 'Eliminando...'
-                                : 'Eliminar'}
-                        </button>
-
-                        <button
-                            type="button"
-                            disabled={isThisTaskLoading}
-                            onClick={() => toggleTaskCompletion(task)}
-                        >
-                            {isThisTaskLoading && loadingAction === 'update'
-                                ? 'Actualizando...'
-                                : task.completed
-                                    ? 'Pendiente'
-                                    : 'Completar'}
-                        </button>
-                    </li>
+                        task={task}
+                        deleteTask={deleteTask}
+                        toggleTaskCompletion={toggleTaskCompletion}
+                        isThisTaskLoading={isThisTaskLoading}
+                        loadingAction={loadingAction}
+                    />
                 )
             })}
         </ul>
