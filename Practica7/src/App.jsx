@@ -4,7 +4,7 @@ import TaskList from './components/TaskList'
 import TaskForm from './components/TaskForm'
 
 function App() {
-  const { tasks, isLoading, errorMessage, addTask, deleteTask, toggleTaskCompletion, loadingTaskId } = useTasks()
+  const { tasks, isLoading, errorMessage, addTask, deleteTask, toggleTaskCompletion, loadingTaskId, loadingAction } = useTasks()
 
    if (isLoading) {
   return <p>Cargando tareas...</p>
@@ -24,7 +24,12 @@ if (errorMessage) {
       {errorMessage && <p>{errorMessage}</p>}
 
       <TaskForm addTask={addTask} loadingTaskId={loadingTaskId} />
-      <TaskList tasks={tasks} deleteTask={deleteTask} toggleTaskCompletion={toggleTaskCompletion} loadingTaskId={loadingTaskId} />
+      <TaskList 
+        tasks={tasks} 
+        deleteTask={deleteTask}
+        toggleTaskCompletion={toggleTaskCompletion} 
+        loadingTaskId={loadingTaskId} 
+        loadingAction={loadingAction} />
     </main>
   )
 }

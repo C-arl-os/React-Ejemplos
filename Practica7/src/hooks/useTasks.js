@@ -7,6 +7,7 @@ export const useTasks = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [errorMessage, setErrorMessage] = useState(null)
     const [loadingTaskId, setLoadingTaskId] = useState(null)
+    const [loadingAction, setLoadingAction] = useState(false)
 
     useEffect(() => {
         fetchTasks()
@@ -38,7 +39,7 @@ export const useTasks = () => {
         try {
             setErrorMessage(null)
             setLoadingTaskId('creating')
-
+            
             const newTask = {
                 title: title.trim(),
                 completed: false,
@@ -66,6 +67,7 @@ export const useTasks = () => {
             setErrorMessage(error.message)
         } finally {
             setLoadingTaskId(null)
+            
         }
     }
 
@@ -74,6 +76,9 @@ export const useTasks = () => {
             
             setErrorMessage(null)
             setLoadingTaskId(id)
+            setLoadingAction('delete')
+
+
             await new Promise((resolve) => setTimeout(resolve, 2000))
             const response = await fetch(`${API_URL}/${id}`, {
                 method: 'DELETE',
@@ -88,6 +93,7 @@ export const useTasks = () => {
             )
         } catch (error) {
             setErrorMessage(error.message)
+            setLoadingAction(null)
         }
     }
 
@@ -95,6 +101,8 @@ export const useTasks = () => {
         try {
             setErrorMessage(null)
             setLoadingTaskId(task.id)
+            setLoadingAction('update')
+
             await new Promise((resolve) => setTimeout(resolve, 2000))
             const updatedTask = {
                 ...task,
@@ -124,6 +132,7 @@ export const useTasks = () => {
             setErrorMessage(error.message)
         }finally {
             setLoadingTaskId(null)
+            setLoadingAction(null)
         }
     }
 
@@ -137,6 +146,7 @@ export const useTasks = () => {
         deleteTask,
         toggleTaskCompletion,
         loadingTaskId,
+        loadingAction,
     }
 
 }

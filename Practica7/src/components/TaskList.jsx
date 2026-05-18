@@ -3,6 +3,7 @@ const TaskList = ({
     deleteTask,
     toggleTaskCompletion,
     loadingTaskId,
+    loadingAction
 }) => {
     if (tasks.length === 0) {
         return <p>No hay tareas disponibles.</p>
@@ -29,7 +30,7 @@ const TaskList = ({
                             disabled={isThisTaskLoading}
                             onClick={() => deleteTask(task.id)}
                         >
-                            {isThisTaskLoading
+                            {isThisTaskLoading && loadingAction === 'delete'
                                 ? 'Eliminando...'
                                 : 'Eliminar'}
                         </button>
@@ -39,9 +40,11 @@ const TaskList = ({
                             disabled={isThisTaskLoading}
                             onClick={() => toggleTaskCompletion(task)}
                         >
-                            {task.completed
-                                ? 'Pendiente'
-                                : 'Completar'}
+                            {isThisTaskLoading && loadingAction === 'update'
+                                ? 'Actualizando...'
+                                : task.completed
+                                    ? 'Pendiente'
+                                    : 'Completar'}
                         </button>
                     </li>
                 )

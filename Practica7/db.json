@@ -4,7 +4,7 @@
       "id": "6",
       "title": "Practicar filtrado de tareas",
       "description": "Usar filter para mostrar tareas dinámicamente",
-      "completed": false,
+      "completed": true,
       "priority": "low"
     },
     {
@@ -22,14 +22,8 @@
       "priority": "high"
     },
     {
-      "title": "ss",
-      "completed": false,
-      "priority": "medium",
-      "id": "VN0Lrc4nmDI"
-    },
-    {
       "title": "tarea2",
-      "completed": false,
+      "completed": true,
       "priority": "medium",
       "id": "LdVrernKg0A"
     },
@@ -38,12 +32,6 @@
       "completed": false,
       "priority": "medium",
       "id": "Af-i37ZjvPA"
-    },
-    {
-      "title": "ww",
-      "completed": false,
-      "priority": "medium",
-      "id": "fKq1Kk-OX64"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
