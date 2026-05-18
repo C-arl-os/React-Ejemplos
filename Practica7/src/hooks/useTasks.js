@@ -61,11 +61,28 @@ export const useTasks = () => {
         setTasks((prevTasks) => [...prevTasks, createdTask])
     }
 
+    //Eliminar una tarea de la API
+    const deleteTask = async (id) => {
+        const response = await fetch(`${API_URL}/${id}`, {
+            method: 'DELETE',
+        })
+
+        if (!response.ok) {
+            throw new Error('No se pudo eliminar la tarea')
+        }
+
+        setTasks((prevTasks) =>
+            prevTasks.filter((task) => task.id !== id)
+        )
+
+    }
+
     return {
         tasks,
         isLoading,
         errorMessage,
         addTask,
+        deleteTask,
     };
 };
 

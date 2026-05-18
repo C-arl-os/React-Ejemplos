@@ -1,30 +1,11 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "title": "Aprender fetch API",
-      "description": "Entender cómo consumir datos desde un backend fake",
-      "completed": false,
-      "priority": "high"
-    },
-    {
       "id": "2",
       "title": "Practicar async await",
       "description": "Manejar operaciones asíncronas correctamente",
       "completed": true,
       "priority": "medium"
-    },
-    {
-      "title": "aa",
-      "completed": false,
-      "priority": "medium",
-      "id": "TgWw2uxk6vA"
-    },
-    {
-      "title": "sss",
-      "completed": false,
-      "priority": "medium",
-      "id": "rx4dLqRRJ5A"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
