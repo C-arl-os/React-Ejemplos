@@ -29,7 +29,7 @@
     },
     {
       "title": "tareas",
-      "completed": false,
+      "completed": true,
       "priority": "medium",
       "id": "Af-i37ZjvPA"
     },
@@ -44,6 +44,18 @@
       "completed": false,
       "priority": "medium",
       "id": "x2UBoDe9ums"
+    },
+    {
+      "title": "aaaa",
+      "completed": false,
+      "priority": "medium",
+      "id": "v6Qc3hiKKyc"
+    },
+    {
+      "title": "zzz",
+      "completed": false,
+      "priority": "medium",
+      "id": "UF0nv4hBQYU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

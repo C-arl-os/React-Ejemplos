@@ -4,13 +4,17 @@ const TaskForm = ({ addTask, loadingTaskId }) => {
     const [title, setTitle] = useState("");
     const isCreating = loadingTaskId === 'creating'
     const [priority, setPriority] = useState("medium");
+    const [formError, setFormError] = useState(null)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!title.trim()) {
+        if (title.trim().length < 3) {
+            setFormError("La tarea debe tener al menos 3 caracteres.");
             return;
         }
+
+        setFormError('');
 
         await addTask(title, priority);
 
@@ -24,9 +28,12 @@ const TaskForm = ({ addTask, loadingTaskId }) => {
                 type="text"
                 placeholder="Nueva tarea"
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => {
+                    setTitle(e.target.value)
+                    setFormError('')
+                }}
             />
-
+            {formError && <p className="error">{formError}</p>}
             <select
                 value={priority}
                 onChange={(e) => setPriority(e.target.value)}
