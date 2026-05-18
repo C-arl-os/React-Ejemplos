@@ -13,6 +13,7 @@ export const useTasks = () => {
 
     const fetchTasks = async () => {
         try {
+            setErrorMessage(null)
             setIsLoading(true)
 
             const response = await fetch(API_URL)
@@ -30,77 +31,97 @@ export const useTasks = () => {
         }
     }
 
+    // Función para agregar una nueva tarea
+
     const addTask = async (title) => {
-        const newTask = {
-            title: title.trim(),
-            completed: false,
-            priority: 'medium',
+        try {
+            const newTask = {
+                title: title.trim(),
+                completed: false,
+                priority: 'medium',
+            }
+
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newTask),
+            })
+
+            if (!response.ok) {
+                throw new Error('No se pudo crear la tarea')
+            }
+
+            const createdTask = await response.json()
+
+            setTasks((prevTasks) => [...prevTasks, createdTask])
+        } catch (error) {
+            setErrorMessage(error.message)
         }
-
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newTask),
-        })
-
-        if (!response.ok) {
-            throw new Error('No se pudo crear la tarea')
-        }
-
-        const createdTask = await response.json()
-
-        setTasks((prevTasks) => [...prevTasks, createdTask])
     }
 
     const deleteTask = async (id) => {
-        const response = await fetch(`${API_URL}/${id}`, {
-            method: 'DELETE',
-        })
+        try {
+            setErrorMessage(null)
 
-        if (!response.ok) {
-            throw new Error('No se pudo eliminar la tarea')
+            const response = await fetch(`${API_URL}/${id}`, {
+                method: 'DELETE',
+            })
+
+            if (!response.ok) {
+                throw new Error('No se pudo eliminar la tarea')
+            }
+
+            setTasks((prevTasks) =>
+                prevTasks.filter((task) => task.id !== id)
+            )
+        } catch (error) {
+            setErrorMessage(error.message)
         }
-
-        setTasks((prevTasks) =>
-            prevTasks.filter((task) => task.id !== id)
-        )
     }
 
     const toggleTaskCompletion = async (task) => {
-        const updatedTask = {
-            ...task,
-            completed: !task.completed,
-        }
+        try {
+            setErrorMessage(null)
 
-        const response = await fetch(`${API_URL}/${task.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedTask),
-        })
+            const updatedTask = {
+                ...task,
+                completed: !task.completed,
+            }
 
-        if (!response.ok) {
-            throw new Error('No se pudo actualizar la tarea')
-        }
+            const response = await fetch(`${API_URL}/${task.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedTask),
+            })
 
-        const updatedTaskData = await response.json()
+            if (!response.ok) {
+                throw new Error('No se pudo actualizar la tarea')
+            }
 
-        setTasks((prevTasks) =>
-            prevTasks.map((t) =>
-                t.id === task.id ? updatedTaskData : t
+            const updatedTaskData = await response.json()
+
+            setTasks((prevTasks) =>
+                prevTasks.map((t) =>
+                    t.id === task.id ? updatedTaskData : t
+                )
             )
-        )
+        } catch (error) {
+            setErrorMessage(error.message)
+        }
     }
 
-    return {
-        tasks,
-        isLoading,
-        errorMessage,
-        addTask,
-        deleteTask,
-        toggleTaskCompletion,
-    }
+}
+
+return {
+    tasks,
+    isLoading,
+    errorMessage,
+    addTask,
+    deleteTask,
+    toggleTaskCompletion,
+}
 }

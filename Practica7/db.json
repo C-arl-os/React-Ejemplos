@@ -1,27 +1,6 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "title": "Aprender fetch API",
-      "description": "Consumir APIs usando fetch en React",
-      "completed": false,
-      "priority": "high"
-    },
-    {
-      "id": "2",
-      "title": "Practicar async await",
-      "description": "Manejar operaciones asíncronas correctamente",
-      "completed": true,
-      "priority": "medium"
-    },
-    {
-      "id": "3",
-      "title": "Estudiar useEffect",
-      "description": "Entender efectos secundarios en React",
-      "completed": false,
-      "priority": "high"
-    },
-    {
       "id": "4",
       "title": "Crear componente TaskCard",
       "description": "Separar la UI en componentes reutilizables",
@@ -32,7 +11,7 @@
       "id": "5",
       "title": "Aprender manejo de estados",
       "description": "Practicar useState y actualización inmutable",
-      "completed": true,
+      "completed": false,
       "priority": "high"
     },
     {
@@ -53,8 +32,14 @@
       "id": "8",
       "title": "Aprender buenas prácticas",
       "description": "Escribir código limpio y mantenible",
-      "completed": true,
+      "completed": false,
       "priority": "high"
+    },
+    {
+      "title": "Crear tarea 1",
+      "completed": false,
+      "priority": "medium",
+      "id": "ItLPYU0G3GQ"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

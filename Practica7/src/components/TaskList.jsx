@@ -5,7 +5,11 @@ const TaskList = ({ tasks, deleteTask, toggleTaskCompletion}) => {
     return (
         <ul>
             {tasks.map((task) => (
-                <li key={task.id}>
+                <li 
+                    key={task.id}
+                    className={task.completed ? 'task-item completed' : 'task-item'}
+                    
+                    >
                     {task.title}
                     <button type="button" onClick={() => deleteTask(task.id)}>
                         Eliminar
