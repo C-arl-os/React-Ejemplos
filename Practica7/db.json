@@ -1,20 +1,6 @@
 {
   "tasks": [
     {
-      "id": "4",
-      "title": "Crear componente TaskCard",
-      "description": "Separar la UI en componentes reutilizables",
-      "completed": false,
-      "priority": "medium"
-    },
-    {
-      "id": "5",
-      "title": "Aprender manejo de estados",
-      "description": "Practicar useState y actualización inmutable",
-      "completed": false,
-      "priority": "high"
-    },
-    {
       "id": "6",
       "title": "Practicar filtrado de tareas",
       "description": "Usar filter para mostrar tareas dinámicamente",
@@ -36,12 +22,6 @@
       "priority": "high"
     },
     {
-      "title": "Crear tarea 1",
-      "completed": false,
-      "priority": "medium",
-      "id": "ItLPYU0G3GQ"
-    },
-    {
       "title": "ss",
       "completed": false,
       "priority": "medium",
@@ -60,10 +40,10 @@
       "id": "Af-i37ZjvPA"
     },
     {
-      "title": "eee",
+      "title": "ww",
       "completed": false,
       "priority": "medium",
-      "id": "cIfNFscwxRU"
+      "id": "fKq1Kk-OX64"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

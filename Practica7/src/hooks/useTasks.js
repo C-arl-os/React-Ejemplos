@@ -6,7 +6,7 @@ export const useTasks = () => {
     const [tasks, setTasks] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [errorMessage, setErrorMessage] = useState(null)
-    const [isActionLoading, setIsActionLoading] = useState(false)
+    const [loadingTaskId, setLoadingTaskId] = useState(null)
 
     useEffect(() => {
         fetchTasks()
@@ -36,14 +36,17 @@ export const useTasks = () => {
 
     const addTask = async (title) => {
         try {
-            setIsActionLoading(true)
+            setErrorMessage(null)
+            setLoadingTaskId('creating')
+
             const newTask = {
                 title: title.trim(),
                 completed: false,
                 priority: 'medium',
             }
-            // Simulamos un retraso de 2 segundos para mostrar el estado de carga
+
             await new Promise((resolve) => setTimeout(resolve, 2000))
+
             const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: {
@@ -62,14 +65,16 @@ export const useTasks = () => {
         } catch (error) {
             setErrorMessage(error.message)
         } finally {
-            setIsActionLoading(false)
+            setLoadingTaskId(null)
         }
     }
 
     const deleteTask = async (id) => {
         try {
+            
             setErrorMessage(null)
-
+            setLoadingTaskId(id)
+            await new Promise((resolve) => setTimeout(resolve, 2000))
             const response = await fetch(`${API_URL}/${id}`, {
                 method: 'DELETE',
             })
@@ -89,7 +94,8 @@ export const useTasks = () => {
     const toggleTaskCompletion = async (task) => {
         try {
             setErrorMessage(null)
-
+            setLoadingTaskId(task.id)
+            await new Promise((resolve) => setTimeout(resolve, 2000))
             const updatedTask = {
                 ...task,
                 completed: !task.completed,
@@ -116,19 +122,21 @@ export const useTasks = () => {
             )
         } catch (error) {
             setErrorMessage(error.message)
+        }finally {
+            setLoadingTaskId(null)
         }
     }
 
 
 
-return {
-    tasks,
-    isLoading,
-    errorMessage,
-    addTask,
-    deleteTask,
-    toggleTaskCompletion,
-    isActionLoading,
-}
+    return {
+        tasks,
+        isLoading,
+        errorMessage,
+        addTask,
+        deleteTask,
+        toggleTaskCompletion,
+        loadingTaskId,
+    }
 
 }

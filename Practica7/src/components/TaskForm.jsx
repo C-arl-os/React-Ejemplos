@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-const TaskForm = ({ addTask, isActionLoading }) => {
+const TaskForm = ({ addTask, loadingTaskId }) => {
     const [title, setTitle] = useState("");
+    const isCreating = loadingTaskId === 'creating'
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,14 +19,15 @@ const TaskForm = ({ addTask, isActionLoading }) => {
     return (
         <form onSubmit={handleSubmit}>
             <input
-                disabled={isActionLoading}
+                disabled={isCreating}
                 type="text"
                 placeholder="Nueva tarea"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
             />
-            <button type="submit" disabled={isActionLoading || !title.trim()}>
-                {isActionLoading ? 'Agregando...' : 'Agregar Tarea'}
+
+            <button type="submit" disabled={isCreating || !title.trim()}>
+                {isCreating ? 'Agregando...' : 'Agregar Tarea'}
             </button>
         </form>
     );
