@@ -1,38 +1,35 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
-const API_URL = "http://localhost:3001/tasks";
+const API_URL = 'http://localhost:3001/tasks'
 
 export const useTasks = () => {
-    const [tasks, setTasks] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [errorMessage, setErrorMessage] = useState(null);
+    const [tasks, setTasks] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+    const [errorMessage, setErrorMessage] = useState(null)
 
     useEffect(() => {
-        fetchTasks();
-    }, []);
+        fetchTasks()
+    }, [])
 
-    // Función para cargar las tareas desde la API
     const fetchTasks = async () => {
         try {
-            setIsLoading(true);
+            setIsLoading(true)
 
-            const response = await fetch(API_URL);
+            const response = await fetch(API_URL)
 
             if (!response.ok) {
-                throw new Error("No se pudieron cargar las tareas");
+                throw new Error('No se pudieron cargar las tareas')
             }
 
-            const data = await response.json();
-
-            setTasks(data);
+            const data = await response.json()
+            setTasks(data)
         } catch (error) {
-            setErrorMessage(error.message);
+            setErrorMessage(error.message)
         } finally {
-            setIsLoading(false);
+            setIsLoading(false)
         }
-    };
+    }
 
-    //Funcion para Agregar una nueva tarea a la API
     const addTask = async (title) => {
         const newTask = {
             title: title.trim(),
@@ -40,7 +37,6 @@ export const useTasks = () => {
             priority: 'medium',
         }
 
-        // Envia la nueva tarea a la API para que sea creada
         const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
@@ -49,19 +45,15 @@ export const useTasks = () => {
             body: JSON.stringify(newTask),
         })
 
-        // Verificar si la respuesta fue exitosa
         if (!response.ok) {
             throw new Error('No se pudo crear la tarea')
         }
 
-        // Obtener la tarea creada desde la respuesta de la API
         const createdTask = await response.json()
 
-        // Actualizar el estado de las tareas con la nueva tarea creada
         setTasks((prevTasks) => [...prevTasks, createdTask])
     }
 
-    //Eliminar una tarea de la API
     const deleteTask = async (id) => {
         const response = await fetch(`${API_URL}/${id}`, {
             method: 'DELETE',
@@ -74,7 +66,33 @@ export const useTasks = () => {
         setTasks((prevTasks) =>
             prevTasks.filter((task) => task.id !== id)
         )
+    }
 
+    const toggleTaskCompletion = async (task) => {
+        const updatedTask = {
+            ...task,
+            completed: !task.completed,
+        }
+
+        const response = await fetch(`${API_URL}/${task.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedTask),
+        })
+
+        if (!response.ok) {
+            throw new Error('No se pudo actualizar la tarea')
+        }
+
+        const updatedTaskData = await response.json()
+
+        setTasks((prevTasks) =>
+            prevTasks.map((t) =>
+                t.id === task.id ? updatedTaskData : t
+            )
+        )
     }
 
     return {
@@ -83,6 +101,6 @@ export const useTasks = () => {
         errorMessage,
         addTask,
         deleteTask,
-    };
-};
-
+        toggleTaskCompletion,
+    }
+}

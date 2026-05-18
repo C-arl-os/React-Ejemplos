@@ -1,4 +1,4 @@
-const TaskList = ({ tasks, deleteTask }) => {
+const TaskList = ({ tasks, deleteTask, toggleTaskCompletion}) => {
     if (tasks.length === 0) {
         return <p>No hay tareas disponibles.</p>;
     }
@@ -9,6 +9,9 @@ const TaskList = ({ tasks, deleteTask }) => {
                     {task.title}
                     <button type="button" onClick={() => deleteTask(task.id)}>
                         Eliminar
+                    </button>
+                    <button type="button" onClick={() => toggleTaskCompletion(task)}>
+                        {task.completed ? 'Pendiente' : 'Completar'}
                     </button>
                 </li>
             ))}
